@@ -39,10 +39,10 @@ public class Dispatcher {
                     .prepareStatement("insert into  java_db.comments values (default, ?, ?, ?, ? , ?, ?)");
             // "myuser, webpage, datum, summary, COMMENTS from feedback.comments");
             // Parameters start with 1
-            preparedStatement.setString(1, "Test");
+            preparedStatement.setString(1, "MyTest");
             preparedStatement.setString(2, "TestEmail");
             preparedStatement.setString(3, "TestWebpage");
-            preparedStatement.setDate(4, new java.sql.Date(2009, 12, 11));
+            preparedStatement.setDate(4, new java.sql.Date(2009, 11, 11));
             preparedStatement.setString(5, "TestSummary");
             preparedStatement.setString(6, "TestComment");
             preparedStatement.executeUpdate();
@@ -55,12 +55,24 @@ public class Dispatcher {
             // Remove again the insert comment
             preparedStatement = connect
                     .prepareStatement("delete from java_db.comments where myuser= ? ; ");
-            preparedStatement.setString(1, "Test");
+            preparedStatement.setString(1, "MyTest");
             preparedStatement.executeUpdate();
 
             resultSet = statement
                     .executeQuery("select * from java_db.comments");
             writeMetaData(resultSet);
+            //////////////////////////////////////
+            preparedStatement = connect
+                    .prepareStatement("insert into  java_db.comments values (default, ?, ?, ?, ? , ?, ?)");
+            // "myuser, webpage, datum, summary, COMMENTS from feedback.comments");
+            // Parameters start with 1
+            preparedStatement.setString(1, "MyTest");
+            preparedStatement.setString(2, "TestEmail");
+            preparedStatement.setString(3, "TestWebpage");
+            preparedStatement.setDate(4, new java.sql.Date(new java.util.Date().getTime()));
+            preparedStatement.setString(5, "TestSummary");
+            preparedStatement.setString(6, "TestComment");
+            preparedStatement.executeUpdate();
 
         } catch (Exception e) {
             throw e;
